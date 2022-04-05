@@ -2,20 +2,22 @@
 // For example (Input --> Output):
 
 function persistence(num) {
-    //   turned number into a string 
-      num += ''
-      let sum = 1
-    //   split string after each index
-      let numStr = num.split('')
-    //   console.log(numStr)
-    //   for loop through the string 
-    //   for(let i = 1; i > numStr.length; i++){
-    //     if(numStr[i] >= 10)
-    //       numStr[i] * 
-    //   }
-      
+    //   turn number into a string 
+    //   loop through the string while the length is less than 1 
+    //   split it then map over the numeric value while multiplying each number by the one next to it
+    //   then returned count
+
+    
+       let count = 0  
+       num += ''
      
+      while(num.length > 1){
+        count++
+        num = num.split('').map(Number).reduce((a,b) => a * b).toString()
+      }
+     return count;
     }
+       
 
     // We want to create a function that will add numbers together when called in succession.
     // We also want to be able to continue to add numbers to our chain.
@@ -25,5 +27,15 @@ function persistence(num) {
     // add(1)(2); // 
 
     function add(n) {
-    }
+      //   create a function that returns the recursion
+        const addNums = function(next){
+          return add(n + next)
+          }
+        
+        addNums.valueOf = function(){
+          return n
+        }
+      //   addNums is constantly adding the numbers together
+        return addNums
+       }
   
